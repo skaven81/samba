@@ -73,7 +73,7 @@ share() { local share="$1" path="$2" browsable=${3:-yes} ro=${4:-yes} \
         echo "   valid users = $(tr ',' ' ' <<< $users)" >>$file
     [[ ${admins:-""} && ! ${admins:-""} =~ none ]] &&
         echo "   admin users = $(tr ',' ' ' <<< $admins)" >>$file
-    if [ "${FOLLOW_LINKS}" = "true" ]; then
+    if [ "${FOLLOW_LINKS:-""}" = "true" ]; then
         echo "   follow symlinks = yes" >>$file
         echo "   wide links = yes" >>$file
     fi
@@ -88,7 +88,7 @@ homes() { local file=/etc/samba/smb.conf
     echo "    comment = Home Directories" >>$file
     echo "    browseable = no" >>$file
     echo "    writable = yes" >>$file
-    if [ "${FOLLOW_LINKS}" = "true" ]; then
+    if [ "${FOLLOW_LINKS:-""}" = "true" ]; then
         echo "    follow symlinks = yes" >>$file
         echo "    wide links = yes" >> $file
     fi
