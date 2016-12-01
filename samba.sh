@@ -63,6 +63,7 @@ perms() { local i file=/etc/samba/smb.conf
 share() { local share="$1" path="$2" browsable=${3:-yes} ro=${4:-yes} \
                 guest=${5:-yes} users=${6:-""} admins=${7:-""} \
                 file=/etc/samba/smb.conf
+    share=$(echo $share)
     sed -i "/\\[$share\\]/,/^\$/d" $file
     echo "[$share]" >>$file
     echo "   path = $path" >>$file
