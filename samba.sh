@@ -225,5 +225,5 @@ elif ps -ef | egrep -v grep | grep -q smbd; then
     echo "Service already running, please restart container to apply changes"
 else
     [[ ${NMBD:-""} ]] && ionice -c 3 nmbd -D
-    exec ionice -c 3 smbd -FS </dev/null
+    exec ionice -c 3 smbd --interactive --debuglevel=3 --debug-stdout </dev/null
 fi

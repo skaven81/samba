@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM debian:bookworm-slim
 MAINTAINER David Personette <dperson@gmail.com>
 
 # Install samba
