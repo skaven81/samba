@@ -4,7 +4,7 @@ MAINTAINER David Personette <dperson@gmail.com>
 # Install samba
 RUN export DEBIAN_FRONTEND='noninteractive' && \
     apt-get update -qq && \
-    apt-get install -qqy --no-install-recommends procps samba \
+    apt-get install -qqy --no-install-recommends procps samba samba-vfs-modules \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     useradd -c 'Samba User' -d /tmp -M -r smbuser && \
     sed -i 's|^\(   log file = \).*|\1/dev/stdout|' /etc/samba/smb.conf && \
@@ -21,6 +21,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     echo '   printcap name = /dev/null' >>/etc/samba/smb.conf && \
     echo '   disable spoolss = yes' >>/etc/samba/smb.conf && \
     echo '   socket options = TCP_NODELAY' >>/etc/samba/smb.conf && \
+    echo '   #ntlm auth = true' >>/etc/samba/smb.conf && \
     echo '' >>/etc/samba/smb.conf && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
